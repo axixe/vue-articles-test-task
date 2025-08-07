@@ -1,0 +1,13 @@
+<template>
+  <BaseLayout>
+    <slot />
+  </BaseLayout>
+</template>
+
+<script setup lang="ts">
+
+</script>
+
+<style scoped lang="scss">
+
+</style>
