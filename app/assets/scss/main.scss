@@ -1,8 +1,10 @@
 @import 'fonts';
 @import 'icons';
 @import 'null';
+@import 'typography';
 
 body {
+  @include body-p;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
 }
