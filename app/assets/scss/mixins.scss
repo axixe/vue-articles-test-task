@@ -1,0 +1,18 @@
+@mixin h1-font {
+  font-size: 84px;
+}
+
+@mixin h4-font {
+  font-size: 36px;
+  line-height: 42px;
+}
+
+@mixin body-p {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+@mixin caption-p {
+  font-size: 16px;
+  line-height: 19px;
+}
