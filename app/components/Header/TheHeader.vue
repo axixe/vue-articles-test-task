@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <header class="header">
     <img src="/images/logotype.webp" alt="logotype" width="84" height="25" class="header__logotype" />
 
     <div class="header__navigation">
@@ -10,7 +10,7 @@
         <BaseButton>Let’s work</BaseButton>
       </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script setup lang="ts">
