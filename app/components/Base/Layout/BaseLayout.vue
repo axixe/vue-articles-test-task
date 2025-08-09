@@ -25,7 +25,7 @@ import TheFooter from "~/components/Footer/TheFooter.vue";
   .inner {
     flex: 1 0 auto;
     padding: 0 112px;
-    background: #FFFFFF;
+    background: $color-white;
   }
 }
 </style>

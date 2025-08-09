@@ -8,8 +8,8 @@
 
 <style scoped lang="scss">
 .article-card-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $indent-3xl $indent-2xl;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: $indent-3xl $indent-2xl;
 }
 </style>
