@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import { articlesMockData } from "~/global/mockData/articlesMockData";
+import { articleListMockData } from "~/global/mockData/articleListMockData";
 
-const cards = articlesMockData()
+const cards = articleListMockData()
 const route = useRoute()
 const router = useRouter()
 
