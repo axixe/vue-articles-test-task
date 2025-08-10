@@ -15,7 +15,7 @@
       {{ pageNumber }}
     </BaseButton>
 
-    <ArrowButton @click="$emit('change:page', currentPage + 1)" :side="SideType.Right" />
+    <ArrowButton v-if="currentPage < totalPages" @click="$emit('change:page', currentPage + 1)" :side="SideType.Right" />
   </div>
 </template>
 
