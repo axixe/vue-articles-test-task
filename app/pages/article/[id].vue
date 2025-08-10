@@ -1,12 +1,12 @@
 <template>
   <div class="article-page">
     <h1 class="article-page__title">
-      {{ article.title }}
+      {{ article?.title }}
     </h1>
 
     <div class="article-page__content-wrapper">
       <img
-        :src="article.image"
+        :src="article?.image"
         alt="article-image"
         width="1216"
         height="700"
@@ -17,7 +17,7 @@
         <span class="article-page__subtitle">About</span>
 
         <p class="h4">
-          {{ article.text }}
+          {{ article?.description }}
         </p>
       </div>
     </div>
@@ -25,9 +25,18 @@
 </template>
 
 <script setup lang="ts">
-import { articleMockData } from "~/global/mockData/articleMockData";
+import { useArticle } from "~/api/modules/article/composables/useArticle";
 
-const article = articleMockData()
+const route = useRoute()
+const { requestArticle } = useArticle()
+
+const getRouteIdAsString = (): string | undefined => {
+  const articleId = route.params.id
+
+  if (typeof articleId === 'string') return articleId
+}
+
+const article = await requestArticle(getRouteIdAsString() as string)
 </script>
 
 <style scoped lang="scss">
