@@ -3,34 +3,55 @@
     <h1>Articles</h1>
 
     <BaseArticleCardList class="page-articles__card-list">
-      <BaseArticleCard
-        v-for="({ preview, content }, index) in cards"
-        :key="index"
-        :preview="preview"
-        :card-content="content"
-        class="page-articles__card"
-      />
+      <div
+        v-for="{ id, image, preview } in paginatedArticleList"
+        :key="id"
+      >
+        <BaseRouterLink :link="`article/${id}`">
+          <BaseArticleCard
+              :preview="image"
+              :card-content="preview"
+              class="page-articles__card"
+          />
+        </BaseRouterLink>
+      </div>
     </BaseArticleCardList>
 
-    <BasePagination :total-pages="99" :max-visible-pages="5" :current-page="currentPage" @change:page="setQueryByPageChanging" />
+    <BasePagination :total-pages="chunkedArticleList.length" :max-visible-pages="5" :current-page="currentPage" @change:page="setQueryByPageChanging" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { articleListMockData } from "~/global/mockData/articleListMockData";
+import { useArticleList } from "~/api/modules/articles-list/composables/useArticleList";
+import { sliceToChunks } from "~/utils/sliceToChunks";
+import type { ArticleResponseType } from "~/api/modules/articles-list/types/articleResponseType";
+import BaseRouterLink from "~/components/Base/Link/BaseRouterLink.vue";
 
-const cards = articleListMockData()
+const { requestArticleList } = useArticleList()
 const route = useRoute()
 const router = useRouter()
+const articleList = ref<ArticleResponseType[] | null>(null)
 
 const currentPage = computed(() => {
   const page = route.query.page
   return typeof page === "string" ? +page : 1
 })
 
+const chunkedArticleList = computed(() => {
+  if (!articleList.value) return []
+
+  return sliceToChunks(articleList.value, 8)
+})
+
+const paginatedArticleList = computed(() => {
+  return chunkedArticleList.value[currentPage.value - 1] || []
+})
+
 const setQueryByPageChanging = (page: number) => {
   router.push({ query: { ...route.query, page: page.toString() } })
 }
+
+articleList.value = await requestArticleList()
 </script>
 
 <style scoped lang="scss">
